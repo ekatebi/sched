@@ -152,7 +152,7 @@ class ZoneHome extends Component {
               onChange={ size => localStorage.setItem('zoneTreeview', size) }>
               <div style={{ ...compStyle, marginTop: 0 }}>
                 {/* <ZoneTreeview /> */}
-                <div>hey there</div>
+                <div>hey there 2</div>
                 <Calendar />
               </div>
               <div style={{ ...compStyle, marginLeft: 10, marginTop: 0 }}>

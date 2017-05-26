@@ -90,6 +90,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-test-utils": "^15.3.1",
     "react-bootstrap": "^0.30.8",
+    "react-bootstrap-table": "^3.3.7",
     "react-burger-menu": "^1.10.14",
     "react-contextmenu": "^2.4.0",
     "react-dnd": "^2.3.0",

@@ -50,7 +50,26 @@ class SecItem extends Component {
 		const { settings, item, onSave, onDelete, onShowEditor, canDrag,
       connectDragSource, handlePermChange, roleNames } = this.props;
 
+    let backgroundColor;
+    let permsSymbol = 'lock';
+
+    if (item.secType === MENU_ITEM_SEC_PERMS) {
+      if (item.Display === true && 
+          (item.Configure === true || item.Configure === undefined)) {
+        backgroundColor = 'lightgreen';
+        permsSymbol = 'unlock fa-flip-horizontal';
+      } else if (item.Display === true && item.Configure === false) {
+        backgroundColor = '#F0E68C'; // light yellow
+        permsSymbol = 'unlock-alt';
+      } else if (item.Display === false &&
+          (item.Configure === false || item.Configure === undefined)) {
+        backgroundColor = 'lightpink';
+        permsSymbol = 'lock';
+      }
+    }
+
     const compStyle = (color) => {
+
       return {
         display: 'flex',
         flex: '0 1 auto',
@@ -65,6 +84,7 @@ class SecItem extends Component {
         textAlign: 'left',
   //      backgroundColor: highlight ? '#EADAF3' : itemBackgroundColor,
         borderRadius: 8,
+        backgroundColor,
 
         width: '100%',
         maxHeight: 40,
@@ -124,7 +144,7 @@ class SecItem extends Component {
   	    break;
   	  default:
         secTypeName = capitalize(SEC_TYPE_NAMES.perm);
-	      sym = 'lock';
+	      sym = permsSymbol;
   	    color = 'brown';
   	  	break;
   	 }
@@ -169,19 +189,22 @@ class SecItem extends Component {
       content =
       (<Col xs={10} xsOffset={0} style={nameStyle}>
         <span><strong>{item.name}</strong></span>
-        {item.Display !== undefined ? (<Button className="btn btn-link" bsSize="small" 
+        {item.Display !== undefined ? (<Button className="btn btn-link" bsSize="small"
+          bsStyle={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Display');
           }}>
             <span style={permStyle(item.Display)}>Display</span>
           </Button>) : (<div />)}
         {item.Configure !== undefined ? (<Button className="btn btn-link" bsSize="small"
+          bsStyle={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Configure');
           }}>
           <span style={permStyle(item.Configure)}>Configure</span>
           </Button>) : (<div />)}
         {item.Admin !== undefined ? (<Button className="btn btn-link" bsSize="small"
+          bsStyle={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Admin');
           }}>

@@ -65,6 +65,9 @@ class UserForm extends Component {
       padding: 0
     };
 
+    if (window.diag) {
+	  	console.log(strongRegex.test(pw), pw.length, pw);
+	  }
 
     const pwStyle = { 
     	width: '100%', 

@@ -150,10 +150,12 @@ class ZoneHome extends Component {
               split="vertical" minSize={160} paneStyle={{ ...compStyle, marginTop: 0 }}
               defaultSize={ `${Math.min(localStorage.getItem('zoneTreeview') || width)}px` }
               onChange={ size => localStorage.setItem('zoneTreeview', size) }>
-              <div style={{ ...compStyle, marginTop: 0 }}>
+              <div style={{ ...compStyle, margin: 'auto', justifyContent: 'center', zIndex: 1, position: 'relative' }}>
                 {/* <ZoneTreeview /> */}
-                <div>hey there 2</div>
-                <Calendar />
+                <Calendar showToday={true} showDateInput={false} onSelect={(value) => {
+                  console.log(value.format('MM-DD-YYYY'));
+                }}
+                />
               </div>
               <div style={{ ...compStyle, marginLeft: 10, marginTop: 0 }}>
                 {content}

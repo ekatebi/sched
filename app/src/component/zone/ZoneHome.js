@@ -200,7 +200,7 @@ function mapStateToProps(state, props) {
     listObject,
     breadcrumb,
     error,
-    loaded: !spinner,
+    loaded: true, // !spinner,
     editorShowing,
     isConfig
   };

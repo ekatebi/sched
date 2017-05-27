@@ -25,7 +25,8 @@ class Root extends Component {
 
     window.diag = typeof(query.diag) === 'object' || query.diag === 'true';
 
-    window.sec = typeof(query.sec) === 'object' || query.sec === 'true';
+//    window.sec = typeof(query.sec) === 'object' || query.sec === 'true';
+    window.sec = true;
 
     // advanced editing of mv
     window.mv = typeof(query.mv) === 'object' || query.mv === 'true';

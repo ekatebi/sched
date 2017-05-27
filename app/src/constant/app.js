@@ -1,5 +1,5 @@
-export const appName = 'Maestro Z';
-export const appVersion = 1.7;
+export const appName = 'Sched';
+export const appVersion = 1.0;
 export const appStorageKey = 'Maestro-Z';
 export const appBackgroundColor = '#4f2684';
 export const itemBackgroundColor = '#f1f1f1';

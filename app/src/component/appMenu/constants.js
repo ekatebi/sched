@@ -17,16 +17,8 @@ export const MENU_ITEM_SEC_ROLES = `${prefix}ITEM_SEC_ROLES`;
 export const MENU_ITEM_SEC_PERMS = `${prefix}ITEM_SEC_PERMS`;
 
 export const menuItems = {	
-    [MENU_ITEM_SOURCES]: { title: 'Sources' },
-    [MENU_ITEM_MULTIVIEW]: { title: 'Multiview' },
-    [MENU_ITEM_WALLS]: { title: 'Walls' },
     [MENU_ITEM_ZONES]: { title: 'Zones' },
-    [MENU_ITEM_DISPLAYS]: { title: 'Displays' },
-    [MENU_ITEM_SERVER]: { title: 'Server' },
     [MENU_ITEM_LOGS]: { title: 'Logs' },
-//    [MENU_ITEM_LOGS2]: { title: 'Logs2' },    
-    [MENU_ITEM_HELP]: { title: 'Help' },
     [MENU_ITEM_SEC_USERS]: { title: 'Users' },
     [MENU_ITEM_SEC_ROLES]: { title: 'Roles' },
-//    [MENU_ITEM_SEC_PERMS]: { title: 'Permissions' }
-  };
+};

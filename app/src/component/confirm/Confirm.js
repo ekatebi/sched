@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Button, Overlay, Label, Grid, Row, Col } from 'react-bootstrap';
 import Modal from './Modal';
 
 class Confirm extends Component {
+/*
   static propTypes = {
     // abortLabel is optional. If it is not supplied, only show the confirm button.
     abortLabel: PropTypes.string,
@@ -13,7 +14,7 @@ class Confirm extends Component {
     resolve: PropTypes.func.isRequired,
     reject: PropTypes.func.isRequired
   };
-
+*/
   static defaultProps = {
     confirmLabel: 'OK',
 //    abortLabel: 'Cancel',

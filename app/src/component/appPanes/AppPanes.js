@@ -1,5 +1,5 @@
 import { Grid, Row, Col } from 'react-bootstrap';
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SplitPane from 'react-split-pane';
@@ -30,11 +30,6 @@ import {
   } from '../appMenu/constants';
 
 class AppPanes extends Component {
-
-  static propTypes = {
-    panes: PropTypes.array.isRequired,
-    onToggleItem: PropTypes.func
-  };
 
   constructor(props) {
     super(props);

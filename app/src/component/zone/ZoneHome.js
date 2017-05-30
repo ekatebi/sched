@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 no-console: 0 */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Well, Collapse, Button, Overlay, Label, Grid, Row, Col }
@@ -15,6 +15,7 @@ import AddItem from '../AddItem';
 import ZoneTreeview from './ZoneTreeview';
 import { PAGINATION } from '../../constant/app';
 import { parentIdKey } from './constants';
+import SchedDay from '../sched/SchedDay';
 
 class ZoneHome extends Component {
 
@@ -166,7 +167,8 @@ class ZoneHome extends Component {
                 />
               </div>
               <div style={{ ...compStyle, marginLeft: 10, marginTop: 0 }}>
-                {content}
+                {/* content */}
+                <SchedDay />
               </div>
             </SplitPane>
           </div>

@@ -1,14 +1,10 @@
 /* eslint react/prop-types: 0 no-console: 0 */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import { Button, Overlay, Label, Grid, Row, Col } from 'react-bootstrap';
 
 class Modal extends Component {
-
-  static propTypes = {
-//    children: PropTypes.element
-  };
 
   static defaultProps = {
   };

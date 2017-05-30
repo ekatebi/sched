@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 no-console: 0 */
 
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import _flow from 'lodash/flow';
@@ -21,7 +21,8 @@ import {
   } from '../appMenu/constants';
 
 class AppUser extends Component { 
-  constructor(props) {
+
+  constructor(props) {    
     super(props);
     this.state = { toggle: true };
   }

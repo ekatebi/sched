@@ -1,12 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
 import { routeActions } from 'react-router-redux';
 
 class Admin extends Component {
-
-  static propTypes = {
-    eventKey: PropTypes.number.isRequired,
-  };
 
   pushPath(path, evt) {
     evt.preventDefault();

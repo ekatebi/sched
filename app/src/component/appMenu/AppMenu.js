@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { scaleRotate as Menu } from 'react-burger-menu';
@@ -13,10 +13,6 @@ import {
   } from './constants';
 
 class AppMenu extends Component {
-  static propTypes = {
-    items: PropTypes.array.isRequired,
-    onToggleItem: PropTypes.func.isRequired,
-  };
 
   constructor(props) {
     super(props);

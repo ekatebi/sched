@@ -54,17 +54,30 @@ class SecItem extends Component {
     let permsSymbol = 'lock';
 
     if (item.secType === MENU_ITEM_SEC_PERMS) {
-      if (item.Display === true && 
-          (item.Configure === true || item.Configure === undefined)) {
-        backgroundColor = 'lightgreen';
-        permsSymbol = 'unlock fa-flip-horizontal';
-      } else if (item.Display === true && item.Configure === false) {
-        backgroundColor = '#F0E68C'; // light yellow
-        permsSymbol = 'unlock-alt';
-      } else if (item.Display === false &&
-          (item.Configure === false || item.Configure === undefined)) {
+      
+      if (item.Display === false &&
+          (item.Configure === false || item.Configure === undefined) &&
+          (item.Admin === false || item.Admin === undefined)) {
         backgroundColor = 'lightpink';
         permsSymbol = 'lock';
+      } else if (item.Display === true && 
+          (item.Configure === true || item.Configure === undefined) &&
+          (item.Admin === true || item.Admin === undefined)) {
+        backgroundColor = 'lightgreen';
+        permsSymbol = 'unlock fa-flip-horizontal';
+      } else if (item.Display === true && 
+          ((item.Configure === false || item.Configure === undefined) &&
+          (item.Admin === true || item.Admin === undefined)) ||
+          ((item.Configure === true || item.Configure === undefined) &&
+          (item.Admin === false || item.Admin === undefined))) {
+
+        backgroundColor = '#F0E68C'; // light yellow
+        permsSymbol = 'unlock-alt';
+      } else if (item.Display === true &&
+          (item.Configure === false || item.Configure === undefined) &&
+          (item.Admin === false || item.Admin === undefined)) {
+        backgroundColor = '#f2b174'; // orange
+        permsSymbol = 'unlock-alt';
       }
     }
 
@@ -189,22 +202,22 @@ class SecItem extends Component {
       content =
       (<Col xs={10} xsOffset={0} style={nameStyle}>
         <span><strong>{item.name}</strong></span>
-        {item.Display !== undefined ? (<Button className="btn btn-link" bsSize="small"
-          bsStyle={{ backgroundColor }} 
+        {item.Display !== undefined ? (<Button bsSize="small"
+          bsStyle="link" style={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Display');
           }}>
             <span style={permStyle(item.Display)}>Display</span>
           </Button>) : (<div />)}
-        {item.Configure !== undefined ? (<Button className="btn btn-link" bsSize="small"
-          bsStyle={{ backgroundColor }} 
+        {item.Configure !== undefined ? (<Button bsSize="small"
+          bsStyle="link" style={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Configure');
           }}>
           <span style={permStyle(item.Configure)}>Configure</span>
           </Button>) : (<div />)}
-        {item.Admin !== undefined ? (<Button className="btn btn-link" bsSize="small"
-          bsStyle={{ backgroundColor }} 
+        {item.Admin !== undefined ? (<Button bsSize="small"
+          bsStyle="link" style={{ backgroundColor }} 
           onClick={(e) => {
             handlePermChange(item.index, 'Admin');
           }}>

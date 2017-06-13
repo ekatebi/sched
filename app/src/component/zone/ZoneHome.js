@@ -21,7 +21,7 @@ class ZoneHome extends Component {
 
   componentWillMount() {
     const { onRequestListEx } = this.props;
-    onRequestListEx();
+//    onRequestListEx();
   }
 
   render() {

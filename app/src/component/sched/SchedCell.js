@@ -23,11 +23,12 @@ export default class SchedCell extends Component {
 			display: 'flex', 
 			flex: '1', 
 			backgroundColor: 'lightblue', 
-			justifyContent: 'center'
+			justifyContent: 'center',
+			borderRadius: 5
   	};
 
   	return (
-		  <Col style={colStyle} span={4}>
+		  <Col style={colStyle} span={this.props.span}>
 		   	<span style={spanStyle}>
 		   		{ this.props.children }
 		   	</span>

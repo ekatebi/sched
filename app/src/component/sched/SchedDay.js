@@ -29,8 +29,9 @@ export default class SchedDay extends Component {
 
   	const gridHeaderData = [
   		{ id: 'time', text: 'Time' },
-  		{ id: 'court:1', text: 'Court 1' },
-  		{ id: 'court:2', text: 'Court 2' },
+  		{ id: 'court-1', text: 'Court 1' },
+  		{ id: 'court-2', text: 'Court 2' },
+  		{ id: 'court-3', text: 'Court 3' },
   	];
 
   	const textStyle = (col, row, outer = false) => {
@@ -43,6 +44,7 @@ export default class SchedDay extends Component {
 				cursor: 'default',
 
 	  		width: col > 0 ? 30 : 80,
+	  		marginLeft: col > 0 ? 0 : -10,
 	  		borderWidth: 2,
 	      borderColor: 'green',
 //	      borderStyle: 'solid',
@@ -74,7 +76,7 @@ export default class SchedDay extends Component {
 
   	const gridHeader = gridHeaderData.map((head, index) => {
   		return (
-					<SchedCell span={index > 0 ? 4 : 2} key={index}>
+					<SchedCell span={index > 0 ? 3 : 2} key={index}>
 						<span>{head.text}</span>
 					</SchedCell>
   			);
@@ -90,12 +92,12 @@ export default class SchedDay extends Component {
 
 				const id = `${head.id}-${hour}:${top ? '00' : '30'}`;
 
-  			const cellText = index > 0 ? '...' : `${top ? (hour < 13 ? hour : hour - 12).toString() : ''}:${top ? '00' : '30'} ${hour < 12 ? 'AM' : 'PM'}`;
+  			const cellText = index > 0 ? 'oooo' : `${top ? (hour < 13 ? hour : hour - 12).toString() : ''}:${top ? '00' : '30'} ${hour < 12 ? 'AM' : 'PM'}`;
 
 // 								onMouseLeave={(e) => { this.handleMouseOver(e, -1, -1); }}
 
 		  	cells.push(
-						<SchedCell span={index > 0 ? 4 : 2} key={hour * 10 + index}>
+						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index}>
 							<span style={textStyle(index, row, true)}>
 								<span style={textStyle(index, row)} id={id} 
 									onMouseOver={(e) => {
@@ -115,13 +117,13 @@ export default class SchedDay extends Component {
 			});
 
 			rows.push(
-				<Row key={hour * 100 + rows.length}>
-					{cells}
-				</Row>
+				<div>
+					<Row key={hour * 100 + rows.length}>
+						{cells}
+					</Row>
+				</div>
 				);
   	};
-
-  	const grid = [];
 
   	let row = -1;
 
@@ -131,17 +133,63 @@ export default class SchedDay extends Component {
 		}
 
 		const compStyle = {
-			overflow: 'auto',
+			display: 'flex',
+			flex: '1',
+			flexFlow: 'column nowrap',
+//			overflow: 'auto',
+	  	borderWidth: 4,
+	    borderColor: 'blue',
+//	    borderStyle: 'solid'
+		};
+
+		const headStyle = {
+			display: 'flex',
+//			flex: '0',
+			flexFlow: 'column nowrap',
+
+			overflowY: 'scroll',
 	  	borderWidth: 2,
-	    borderColor: 'lightgreen',
+	    borderColor: 'black',
 //	    borderStyle: 'solid'
 		};
 // 				onMouseOver={(e) => { this.handleMouseOver(e, -1, -1); }}
 
+		const bodyStyle = {
+			display: 'flex',
+			flex: '1',
+			flexFlow: 'column nowrap',
+//      height: '100%',
+			
+			overflowY: 'scroll',
+	  	borderWidth: 4,
+	    borderColor: 'red',
+//	    borderStyle: 'solid',
+//	    backgroundColor: 'lightgreen'
+		};
+
+		const innerStyle = {
+			display: 'flex',
+			flex: '0 0 auto',
+			flexFlow: 'column nowrap',
+
+//			height: 300,
+//			overflowY: 'scroll',
+	  	borderWidth: 2,
+	    borderColor: 'black',
+//	    borderStyle: 'solid',
+//	    backgroundColor: 'pink'
+		};
+
   	return (
-  		<div style={compStyle} id={'grid'}>
-  			<Row>{gridHeader}</Row>
-  			{rows}
+  		<div style={compStyle} id={'grid-comp'}>
+		 		<div style={headStyle} id={'grid-head'}>
+	  			<Row>{gridHeader}</Row>
+	  		</div>
+	  		<div style={bodyStyle} id={'grid-outer'}>
+ 		  		<div style={innerStyle} id={'grid'}>
+				  	{rows}
+					</div>
+				</div>
 			</div>
   		);
   }

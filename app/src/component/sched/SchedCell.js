@@ -21,18 +21,21 @@ export default class SchedCell extends Component {
 
   	const spanStyle = {
 			display: 'flex', 
-			flex: '1', 
+			flex: '1 0 auto',
+			minHeight: 20,
+//			width: 100,
 			backgroundColor: 'lightblue', 
 			justifyContent: 'center',
-			borderRadius: 5
+			borderRadius: 5,
+//			padding: 10
   	};
 
   	return (
-		  <Col style={colStyle} span={this.props.span}>
-		   	<span style={spanStyle}>
-		   		{ this.props.children }
-		   	</span>
-		   </Col>
+			  <Col style={colStyle} span={this.props.span}>
+			   	<span style={spanStyle}>
+			   		{ this.props.children }
+			   	</span>
+			   </Col>
   		);
   }
 }

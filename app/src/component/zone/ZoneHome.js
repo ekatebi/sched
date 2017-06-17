@@ -166,7 +166,14 @@ class ZoneHome extends Component {
                 }}
                 />
               </div>
-              <div style={{ ...compStyle, marginLeft: 10, marginTop: 0 }}>
+              <div style={{ ...compStyle, 
+                  overflow: 'auto',
+                  marginLeft: 10, 
+                  marginTop: 0,
+                  borderWidth: 2,
+                  borderColor: 'pink',
+                  borderStyle: 'solid'
+                }}>
                 {/* content */}
                 <SchedDay />
               </div>

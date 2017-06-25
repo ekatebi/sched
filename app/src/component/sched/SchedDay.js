@@ -31,53 +31,71 @@ export default class SchedDay extends Component {
   		{ id: 'time', text: 'Time' },
   		{ id: 'court-1', text: 'Court 1' },
   		{ id: 'court-2', text: 'Court 2' },
-  		{ id: 'court-3', text: 'Court 3' },
+//  		{ id: 'court-3', text: 'Court 3' },
   	];
 
   	const textStyle = (col, row, outer = false) => {
 
-  		const style = {
+  		let style = {
 				display: 'flex', 
-				justifyContent: col > 0 ? 'center' : 'flex-end',
+//				flex: '1',
+				justifyContent: col === 0 && !outer ? 'flex-end' : 'center',
+				alignItems: 'center',
 
 	  		textAlign: 'left',
 				cursor: 'default',
 
 	  		width: col > 0 ? 30 : 80,
-	  		marginLeft: col > 0 ? 0 : -10,
 	  		borderWidth: 2,
 	      borderColor: 'green',
-//	      borderStyle: 'solid',
-				borderRadius: 5
+//	      borderStyle: 'solid'
 	    };
-
-	    if (col < 0 && row < 0) {
-	    	return style;
-	    }
 
 	    if (row === this.state.overRow && 
 	    	(col === 0 || col === this.state.overCol) && 
-	    	this.state.overCol > 0) {
-	    	
-	    	if (col > 0) {
-			    return { ...style, flex: '1', backgroundColor: 'yellow' };
-			  }
-			  
-//			  return { ...style, flex: '1', justifyContent: 'center', backgroundColor: 'yellow' };
-				if (outer) {
-				  return { ...style, flex: '1', justifyContent: 'center', backgroundColor: 'yellow' };
-				}
-
-			  return { ...style, backgroundColor: 'yellow' };
+	    	this.state.overCol > 0 && outer) {
+				style = { ...style, 
+					flex: '1 0 auto',
+					height: 30, 
+					justifyContent: 'center', backgroundColor: 'yellow' };
 	    }
 
-	    return col > 0 ? { ...style, flex: '1' } : style;
+	    style = col > 0 ? { ...style, flex: '1' } : style;
+
+	    return style;
   	};
+
+  	const contentStyle = {
+			display: 'flex', 
+			flex: '0 0 auto',
+			flexFlow: 'row nowrap',
+			height: 30,
+			width: 45,
+			justifyContent: 'space-between',
+			alignItems: 'center',
+
+	  	borderWidth: 2,
+	    borderColor: 'red',
+//	    borderStyle: 'solid',
+		};
+
+  	const headerStyle = {
+			display: 'flex', 
+			flex: '1 0 auto',
+			height: 30,
+			width: 60,
+			justifyContent: 'center',
+			alignItems: 'center',
+
+	  		borderWidth: 2,
+	      borderColor: 'pink',
+//	      borderStyle: 'solid',
+		};
 
   	const gridHeader = gridHeaderData.map((head, index) => {
   		return (
 					<SchedCell span={index > 0 ? 3 : 2} key={index}>
-						<span>{head.text}</span>
+						<span style={headerStyle}>{head.text}</span>
 					</SchedCell>
   			);
   	});
@@ -92,20 +110,29 @@ export default class SchedDay extends Component {
 
 				const id = `${head.id}-${hour}:${top ? '00' : '30'}`;
 
-  			const cellText = index > 0 ? 'oooo' : `${top ? (hour < 13 ? hour : hour - 12).toString() : ''}:${top ? '00' : '30'} ${hour < 12 ? 'AM' : 'PM'}`;
+				let content = (
+					<span style={contentStyle}>
+						<i className="fa fa-circle-o" aria-hidden="true"></i>
+						<i className="fa fa-circle-o" aria-hidden="true"></i>
+						<i className="fa fa-circle-o" aria-hidden="true"></i>
+					</span>
+					);
 
-// 								onMouseLeave={(e) => { this.handleMouseOver(e, -1, -1); }}
+  			const timeCell = (
+	  			<span style={{ paddingRight: 10 }}>
+	  					{`${top ? (hour < 13 ? hour : hour - 12).toString() : ''}:${top ? '00' : '30'} ${hour < 12 ? 'AM' : 'PM'}`}
+	  			</span>);
+
+  			const cellText = index > 0 ? content : timeCell;
 
 		  	cells.push(
 						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index}>
 							<span style={textStyle(index, row, true)}>
 								<span style={textStyle(index, row)} id={id} 
 									onMouseOver={(e) => {
-//									 	this.handleMouseOver(e, row, index); 
 										this.setState({ overRow: row, overCol: index });
 									}}
 									onMouseLeave={(e) => {
-//									 	this.handleMouseOver(e, row, index); 
 										this.setState({ overRow: -1, overCol: -1 });
 									}}
 									>

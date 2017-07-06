@@ -15,6 +15,8 @@ export default class SchedCell extends Component {
 
   render() {
   
+  	const { courtId, time } = this.props;
+
   	const colStyle = {
   		padding: 3
   	};
@@ -39,7 +41,9 @@ export default class SchedCell extends Component {
   	};
 
   	return (
-			  <Col style={colStyle} span={this.props.span}>
+			  <Col style={colStyle} span={this.props.span} onClick={(e) => {
+			  	console.log(courtId, time, this.props.date.format());
+			  }}>
 			   	<span style={spanStyle}>
 				   	{ this.props.children }
 			   	</span>

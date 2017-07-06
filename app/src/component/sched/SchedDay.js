@@ -6,7 +6,9 @@ import { Well, Collapse, Button, Overlay, Label }
 // import ReactTable from 'sb-react-table';
 import { Row, Col } from 'react-simple-flex-grid';
 import SchedCell from './SchedCell';
-export default class SchedDay extends Component {
+import * as schedActionsEx from './actions';
+
+class SchedDay extends Component {
 
   constructor(props) {
 	  super(props);
@@ -26,6 +28,8 @@ export default class SchedDay extends Component {
 	}
 
   render() {
+
+  	const { date } = this.props;
 
   	const gridHeaderData = [
   		{ id: 'time', text: 'Time' },
@@ -87,9 +91,9 @@ export default class SchedDay extends Component {
 			justifyContent: 'center',
 			alignItems: 'center',
 
-	  		borderWidth: 2,
-	      borderColor: 'pink',
-//	      borderStyle: 'solid',
+	  	borderWidth: 2,
+	    borderColor: 'pink',
+//	  borderStyle: 'solid',
 		};
 
   	const gridHeader = gridHeaderData.map((head, index) => {
@@ -109,6 +113,8 @@ export default class SchedDay extends Component {
 			gridHeaderData.forEach((head, index) => {	
 
 				const id = `${head.id}-${hour}:${top ? '00' : '30'}`;
+				const courtId = head.id;
+				const time = `${hour}:${top ? '00' : '30'}`;
 
 				let content = (
 					<span style={contentStyle}>
@@ -126,7 +132,8 @@ export default class SchedDay extends Component {
   			const cellText = index > 0 ? content : timeCell;
 
 		  	cells.push(
-						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index}>
+						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index} 
+							courtId={courtId} time={time} date={date}>
 							<span style={textStyle(index, row, true)}>
 								<span style={textStyle(index, row)} id={id} 
 									onMouseOver={(e) => {
@@ -144,7 +151,7 @@ export default class SchedDay extends Component {
 			});
 
 			rows.push(
-				<div>
+				<div key={rows.length}>
 					<Row key={hour * 100 + rows.length}>
 						{cells}
 					</Row>
@@ -221,3 +228,22 @@ export default class SchedDay extends Component {
   		);
   }
 }
+
+
+function mapStateToProps(state, props) {
+
+  const { date } = state.sched;
+
+  return {
+    date,
+  };
+
+}
+
+function mapDispatchToProps(dispatch) {
+ return {
+      schedActions: bindActionCreators(schedActionsEx, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SchedDay);

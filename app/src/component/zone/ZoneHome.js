@@ -7,7 +7,8 @@ import { Well, Collapse, Button, Overlay, Label, Grid, Row, Col }
   from 'react-bootstrap';
 import SplitPane from 'react-split-pane';
 import Calendar from 'rc-calendar';
-import * as actions from './actions';
+import * as zoneActionsEx from './actions';
+import * as schedActionsEx from '../sched/actions';
 import Panel from '../Panel';
 import ZoneList from './ZoneList';
 import ZoneForm from './ZoneForm';
@@ -16,6 +17,7 @@ import ZoneTreeview from './ZoneTreeview';
 import { PAGINATION } from '../../constant/app';
 import { parentIdKey } from './constants';
 import SchedDay from '../sched/SchedDay';
+import _flow from 'lodash/flow';
 
 class ZoneHome extends Component {
 
@@ -163,6 +165,7 @@ class ZoneHome extends Component {
                 {/* <ZoneTreeview /> */}
                 <Calendar showToday={true} showDateInput={false} onSelect={(value) => {
                   console.log(value.format('MM-DD-YYYY'));
+                  this.props.schedActions.receiveDate(value);
                 }}
                 />
               </div>
@@ -217,7 +220,10 @@ function mapStateToProps(state, props) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+ return {
+      zoneActions: bindActionCreators(zoneActionsEx, dispatch),
+      schedActions: bindActionCreators(schedActionsEx, dispatch),
+    };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ZoneHome);

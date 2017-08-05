@@ -2,12 +2,14 @@
 import moment from 'moment';
 
 import { 
-  RECEIVE_DATE
+  RECEIVE_DATE,
+  RECEIVE_RES
 } from './constants';
 
 // log state
 const initState = {
-  date: moment()
+  date: moment(),
+  res: undefined
 };
 
 export default (state = initState, action) => {
@@ -16,6 +18,8 @@ export default (state = initState, action) => {
     case RECEIVE_DATE:
       console.log('RECEIVE_DATE', action.date.format());
       return { ...state, date: action.date };
+    case RECEIVE_RES:
+      return { ...state, res: { ...action.res } };
     default:
       return state;
   }

@@ -61,7 +61,8 @@ class SchedDay extends Component {
 				style = { ...style, 
 					flex: '1 0 auto',
 					height: 30, 
-					justifyContent: 'center', backgroundColor: 'yellow' };
+					justifyContent: 'center', 
+					backgroundColor: 'yellow' };
 	    }
 
 	    style = col > 0 ? { ...style, flex: '1' } : style;
@@ -228,7 +229,6 @@ class SchedDay extends Component {
   		);
   }
 }
-
 
 function mapStateToProps(state, props) {
 

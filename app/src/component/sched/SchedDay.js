@@ -99,7 +99,7 @@ class SchedDay extends Component {
 
   	const gridHeader = gridHeaderData.map((head, index) => {
   		return (
-					<SchedCell span={index > 0 ? 3 : 2} key={index}>
+					<SchedCell span={index > 0 ? 3 : 2} key={index} header={true}>
 						<span style={headerStyle}>{head.text}</span>
 					</SchedCell>
   			);
@@ -133,8 +133,9 @@ class SchedDay extends Component {
   			const cellText = index > 0 ? content : timeCell;
 
 		  	cells.push(
-						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index} 
-							courtId={courtId} time={time} date={date}>
+						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index} header={false}
+							courtId={courtId} time={time} date={date} col={index} row={row} hour={hour} top={top} id={id}>
+							{/*
 							<span style={textStyle(index, row, true)}>
 								<span style={textStyle(index, row)} id={id} 
 									onMouseOver={(e) => {
@@ -147,6 +148,7 @@ class SchedDay extends Component {
 									{cellText}
 								</span>
 							</span>
+							*/}
 						</SchedCell>
 		  		);
 			});

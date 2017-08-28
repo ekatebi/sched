@@ -134,22 +134,7 @@ class SchedDay extends Component {
 
 		  	cells.push(
 						<SchedCell span={index > 0 ? 3 : 2} key={hour * 10 + index} header={false}
-							courtId={courtId} time={time} date={date} col={index} row={row} hour={hour} top={top} id={id}>
-							{/*
-							<span style={textStyle(index, row, true)}>
-								<span style={textStyle(index, row)} id={id} 
-									onMouseOver={(e) => {
-										this.setState({ overRow: row, overCol: index });
-									}}
-									onMouseLeave={(e) => {
-										this.setState({ overRow: -1, overCol: -1 });
-									}}
-									>
-									{cellText}
-								</span>
-							</span>
-							*/}
-						</SchedCell>
+							courtId={courtId} time={time} date={date} col={index} row={row} hour={hour} top={top} id={id} />
 		  		);
 			});
 

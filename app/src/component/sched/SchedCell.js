@@ -16,9 +16,9 @@ class SchedCell extends Component {
 
   render() {
   
-  	const { cellId, selected, schedActions, col, row, hour, top, id, header } = this.props;
+  	const { cellId, selected, schedActions, col, row, hour, top, id, header, overRow } = this.props;
   	const { over } = this.state;
-  	const { onReceiveRes } = schedActions;
+  	const { onReceiveReserv, receiveOverCell } = schedActions;
 
   	const colStyle = {
   		padding: 3
@@ -59,13 +59,14 @@ class SchedCell extends Component {
 //	      borderStyle: 'solid'
 	    };
 
-	    if (row === this.state.overRow && 
+	    if (overRow || (row === this.state.overRow && 
 	    	(col === 0 || col === this.state.overCol) && 
-	    	this.state.overCol > 0 && outer && !selected) {
+	    	this.state.overCol > 0 && outer && !selected)) {
 				style = { ...style, 
 					flex: '1 0 auto',
 					height: 30, 
-					justifyContent: 'center', 
+					padding: 2,
+					justifyContent: col > 0 ? 'center' : 'flex-end', 
 					backgroundColor: 'yellow' };
 	    }
 
@@ -109,15 +110,19 @@ class SchedCell extends Component {
 		  <Col style={colStyle} span={this.props.span}		  
 				onMouseOver={(e) => {
 					this.setState({ over: true });
+					if (!selected) {
+						receiveOverCell({ row, col });
+					}
 				}}
 				onMouseLeave={(e) => {
 					this.setState({ over: false });
+					receiveOverCell();
 				}}
 			  onClick={(e) => {
 //			  	console.log(courtId, time, this.props.date.format());
 						console.log(cellId);
 						if (col > 0) {
-							onReceiveRes(cellId);
+							onReceiveReserv(cellId);
 						}
 			  }}>
 			  <span style={spanStyle}>
@@ -127,9 +132,13 @@ class SchedCell extends Component {
 						<span style={textStyle(col, row)} id={id} 
 							onMouseOver={(e) => {
 								this.setState({ overRow: row, overCol: col });
+								if (!selected) {
+									receiveOverCell({ row, col });
+								}
 							}}
 							onMouseLeave={(e) => {
 								this.setState({ overRow: -1, overCol: -1 });
+								receiveOverCell();
 							}}
 							>
 							{cellText}
@@ -144,18 +153,20 @@ class SchedCell extends Component {
 
 function mapStateToProps(state, props) {
 
-  const { courtId, time, date } = props;
-  const { res } = state.sched;
+  const { courtId, time, date, row, col } = props;
+  const { res, overCell } = state.sched;
 
 	const time2 = time ? time.replace(':', '-') : '';
 	const date2 = date ? date.format('MM-DD-YYYY') : '';
 	const cellId = `${courtId}-${time2}-${date2}`;
+	const overRow = overCell && overCell.row === row && col === 0 && row > 0;
 
 	const selected = res && res[cellId];
 
   return {
     cellId,
-    selected
+    selected,
+    overRow
   };
 
 }

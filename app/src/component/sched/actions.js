@@ -1,7 +1,8 @@
 
 import { 
   RECEIVE_DATE,
-  RECEIVE_RES
+  RECEIVE_RES,
+  RECEIVE_OVER_CELL
 } from './constants';
 
 export function receiveDate(date) {
@@ -11,14 +12,21 @@ export function receiveDate(date) {
 	};
 }
 
-function receiveRes(res) {
+function receiveReserv(res) {
 	return {
 		type: RECEIVE_RES,
 		res
 	};
 }
 
-export function onReceiveRes(r) {
+export function receiveOverCell(overCell) {
+	return {
+		type: RECEIVE_OVER_CELL,
+		overCell
+	};
+}
+
+export function onReceiveReserv(r) {
   return (dispatch, getState) => {
 
   	let { res } = getState().sched;
@@ -33,6 +41,16 @@ export function onReceiveRes(r) {
   		res[r] = r;
   	}
 
-  	dispatch(receiveRes(res));
+  	dispatch(receiveReserv(res));
+  	dispatch(receiveOverCell());
   };
 }
+
+export function onReceiveDate(date) {
+  return (dispatch, getState) => {
+  	dispatch(receiveDate(date));
+  	dispatch(receiveReserv({}));
+  };
+}
+
+

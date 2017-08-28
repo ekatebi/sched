@@ -165,7 +165,7 @@ class ZoneHome extends Component {
                 {/* <ZoneTreeview /> */}
                 <Calendar showToday={true} showDateInput={false} onSelect={(value) => {
                   console.log(value.format('MM-DD-YYYY'));
-                  this.props.schedActions.receiveDate(value);
+                  this.props.schedActions.onReceiveDate(value);
                 }}
                 />
               </div>
